@@ -21,16 +21,12 @@ import org.apache.logging.log4j.Logger;
 final class IntervalTreeImpl implements IntervalTree {
   private static final Logger logger = LogManager.getLogger(IntervalTreeImpl.class.getSimpleName());
 
-  private int nodeCount;
   private IntervalTreeNode root;
 
   @Override
-  public boolean insert(final Interval interval) {
+  public void insert(final Interval interval) {
     validateInterval(interval);
-
     root = insert(root, interval);
-    nodeCount++;
-    return false;
   }
 
   private IntervalTreeNode insert(IntervalTreeNode where, final Interval interval) {
@@ -54,13 +50,20 @@ final class IntervalTreeImpl implements IntervalTree {
   public boolean delete(final Interval interval) {
     validateInterval(interval);
     // TODO
-    nodeCount--;
     return false;
   }
 
+  // compute lazily, don't pay upfront cost
   @Override
   public int nodeCount() {
-    return nodeCount;
+    return nodeCount(root);
+  }
+
+  private int nodeCount(final IntervalTreeNode current) {
+    if (current == null) {
+      return 0;
+    }
+    return 1 + nodeCount(current.getLeftChild()) + nodeCount(current.getRightChild());
   }
 
   @Override
@@ -70,7 +73,7 @@ final class IntervalTreeImpl implements IntervalTree {
     boolean found = false;
     if (whatToFind != null && root != null) {
       final LinkedList<IntervalTreeNode> queue = new LinkedList<>();
-      queue.offerLast(root);;
+      queue.offerLast(root);
       while (!queue.isEmpty()) {
         final IntervalTreeNode current = queue.removeLast();
         if (whatToFind.equals(current.getInterval())) {
@@ -161,6 +164,7 @@ final class IntervalTreeImpl implements IntervalTree {
     return levelOrderedTree;
   }
 
+  // compute lazily, don't pay upfront cost
   @Override
   public int levelCount() {
     // dfs it to work around the accounting hassle and upfront cost associated with having to
