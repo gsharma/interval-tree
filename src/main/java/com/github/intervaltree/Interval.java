@@ -9,6 +9,7 @@ public final class Interval {
   private final int low;
   private final int high;
 
+  // let the tree validate intervals
   public Interval(final int low, final int high) {
     this.low = low;
     this.high = high;

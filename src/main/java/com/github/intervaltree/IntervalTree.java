@@ -9,6 +9,7 @@ import java.util.List;
  * @author gaurav
  */
 public interface IntervalTree {
+  // Insert an interval into the tree.
   void insert(final Interval interval);
 
   // Delete an interval, if it exists, from the tree.
