@@ -20,19 +20,19 @@ public class IntervalTreeTest {
   public void testTree() {
     // construct and seed a tree
     final IntervalTree tree = IntervalTree.IntervalTreeBuilder.newBuilder().build();
-    Interval interval1 = new Interval(17, 19);
+    Interval interval1 = new Interval(17, 19, "one");
     tree.insert(interval1);
-    Interval interval2 = new Interval(21, 24);
+    Interval interval2 = new Interval(21, 24, "two");
     tree.insert(interval2);
-    Interval interval3 = new Interval(5, 8);
+    Interval interval3 = new Interval(5, 8, "three");
     tree.insert(interval3);
-    Interval interval4 = new Interval(4, 8);
+    Interval interval4 = new Interval(4, 8, "four");
     tree.insert(interval4);
-    Interval interval5 = new Interval(15, 18);
+    Interval interval5 = new Interval(15, 18, "five");
     tree.insert(interval5);
-    Interval interval6 = new Interval(7, 10);
+    Interval interval6 = new Interval(7, 10, "six");
     tree.insert(interval6);
-    Interval interval7 = new Interval(16, 22);
+    Interval interval7 = new Interval(16, 22, "seven");
     tree.insert(interval7);
 
     // validate if node and level count is accurate
@@ -73,11 +73,11 @@ public class IntervalTreeTest {
     assertTrue(tree.findExactMatch(interval7));
 
     // test overlaps
-    assertEquals(0, tree.findOverlaps(new Interval(25, 26)).size());
-    assertEquals(1, tree.findOverlaps(new Interval(24, 26)).size());
-    assertEquals(3, tree.findOverlaps(new Interval(3, 10)).size());
-    assertEquals(5, tree.findOverlaps(new Interval(10, 25)).size());
-    assertEquals(7, tree.findOverlaps(new Interval(3, 25)).size());
+    assertEquals(0, tree.findOverlaps(new Interval(25, 26, "z")).size());
+    assertEquals(1, tree.findOverlaps(new Interval(24, 26, "y")).size());
+    assertEquals(3, tree.findOverlaps(new Interval(3, 10, "x")).size());
+    assertEquals(5, tree.findOverlaps(new Interval(10, 25, "w")).size());
+    assertEquals(7, tree.findOverlaps(new Interval(3, 25, "v")).size());
   }
 
 }

@@ -44,4 +44,5 @@ public interface IntervalTree {
 
     private IntervalTreeBuilder() {}
   }
+
 }

@@ -80,17 +80,12 @@ public final class IntervalTreeNode {
     if (this == obj) {
       return true;
     }
-    if (obj == null) {
-      return false;
-    }
-    if (!(obj instanceof IntervalTreeNode)) {
+    if (obj == null || !(obj instanceof IntervalTreeNode)) {
       return false;
     }
     IntervalTreeNode other = (IntervalTreeNode) obj;
-    if (interval == null) {
-      if (other.interval != null) {
-        return false;
-      }
+    if (interval == null || other.interval != null) {
+      return false;
     } else if (!interval.equals(other.interval)) {
       return false;
     }
