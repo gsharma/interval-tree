@@ -1,3 +1,5 @@
+[![Licence](https://img.shields.io/hexpm/l/plug.svg)](https://github.com/gsharma/interval-tree/blob/master/LICENSE)
+
 # Interval Tree
 
 Interval tree is a tree designed to hold intervals with the goal of quickly finding overlapping intervals (with any given interval or point). It is typically used for windowing queries.
